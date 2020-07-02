@@ -1,15 +1,22 @@
 package lt.task.realestateregistry.controller;
 
 
+import lt.task.realestateregistry.model.Building;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import lt.task.realestateregistry.userservice.BuildingTaskService;
 
 @RestController
 @RequestMapping("/api/")
 public class RecordController {
 
+    @Autowired
+    BuildingTaskService buildingTaskService;
+
+
     @GetMapping
-    public String getAllBuildingRecords(){
-        return "List of buildings";
+    public Iterable<Building> getAllBuildingRecords(){
+        return buildingTaskService.getAllBuildings();
     }
 
     @PostMapping
