@@ -1,7 +1,9 @@
 package lt.task.realestateregistry.controller;
 
 
-import lt.task.realestateregistry.model.Building;
+import io.swagger.annotations.ApiOperation;
+import lt.task.realestateregistry.model.BuildingModel;
+import lt.task.realestateregistry.model.BuildingPostModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import lt.task.realestateregistry.userservice.BuildingTaskService;
@@ -15,13 +17,15 @@ public class RecordController {
 
 
     @GetMapping
-    public Iterable<Building> getAllBuildingRecords(){
+    @ApiOperation(value = "Get building records", notes = "Returns list of building records.")
+    public Iterable<BuildingModel> getAllBuildingRecords(){
         return buildingTaskService.getAllBuildings();
     }
 
     @PostMapping
-    public String createBuildingRecord(){
-        return "creating building";
+    @ApiOperation(value = "Create building record", notes = "Creates building record.")
+    public BuildingModel createBuildingRecord(@RequestBody BuildingModel buildingModel){
+        return buildingTaskService.createBuilding(buildingModel);
     }
 
     @PutMapping

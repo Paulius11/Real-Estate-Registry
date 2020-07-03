@@ -6,9 +6,9 @@ import javax.persistence.*;
 
 @Entity
 @Component
-public class Building {
+public class BuildingModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private String city;
@@ -21,10 +21,10 @@ public class Building {
     @Enumerated(EnumType.STRING)
     private PropertyType propertyType;
 
-    public Building() {
+    public BuildingModel() {
     }
 
-    public Building(String city, String street, int number, String owner, int size, float marketValue, PropertyType propertyType) {
+    public BuildingModel(String city, String street, int number, String owner, int size, float marketValue, PropertyType propertyType) {
         super();
         this.city = city;
         this.street = street;
@@ -33,6 +33,10 @@ public class Building {
         this.size = size;
         this.marketValue = marketValue;
         this.propertyType = propertyType;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setCity(String city) {
@@ -61,6 +65,38 @@ public class Building {
 
     public void setPropertyType(PropertyType propertyType) {
         this.propertyType = propertyType;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public float getMarketValue() {
+        return marketValue;
+    }
+
+    public PropertyType getPropertyType() {
+        return propertyType;
     }
 
     @Override
