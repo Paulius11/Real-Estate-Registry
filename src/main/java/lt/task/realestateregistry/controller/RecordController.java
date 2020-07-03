@@ -15,7 +15,6 @@ public class RecordController {
     @Autowired
     BuildingTaskService buildingTaskService;
 
-
     @GetMapping
     @ApiOperation(value = "Get building records", notes = "Returns list of building records.")
     public Iterable<BuildingModel> getAllBuildingRecords(){
@@ -29,11 +28,13 @@ public class RecordController {
     }
 
     @PutMapping
+    @ApiOperation(value = "Edit building record", notes = "Edits building record.")
     public String editBuildingRecord(){
         return "editing building";
     }
 
     @DeleteMapping
+    @ApiOperation(value = "Delete building record", notes = "Deletes building record.")
     public String deleteBuildingRecord(){
         return "deleting building";
     }
