@@ -4,7 +4,6 @@ import lt.task.realestateregistry.doa.RecordRepository;
 import lt.task.realestateregistry.exceptions.NotFoundException;
 import lt.task.realestateregistry.model.BuildingModel;
 
-import lt.task.realestateregistry.model.BuildingPostModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +20,7 @@ public class BuildingTaskService {
 
 
     @Autowired
-    private RecordRepository recordController;
+    private RecordRepository repo;
 
     @Autowired
     private BuildingModel buildingModel;
@@ -32,7 +31,7 @@ public class BuildingTaskService {
     public Iterable<BuildingModel> getAllBuildings() {
         listOfBuildings =  new ArrayList<>();
         log.info("Getting list of all records");
-        return (List<BuildingModel>) recordController.findAll();
+        return (List<BuildingModel>) repo.findAll();
     }
 
     /**
@@ -40,7 +39,7 @@ public class BuildingTaskService {
      */
     public BuildingModel createBuilding(BuildingModel buildingModel) {
         log.info("Creating new building");
-        BuildingModel save = recordController.save(buildingModel);
+        BuildingModel save = repo.save(buildingModel);
         log.debug(save.toString());
         return save;
     }
@@ -50,9 +49,29 @@ public class BuildingTaskService {
     public void deleteRecordById(Long id) {
         try {
             log.info("Deleting by id: " + id);
-            recordController.deleteById(id);
+            repo.deleteById(id);
         } catch (Exception e) {
             throw new NotFoundException("id:" + id);
         }
+    }
+
+    public void editBuildingRecord(BuildingModel newBuildingModel, Long id) {
+        if (repo.findById(id).isPresent()) {
+            BuildingModel oldRecord = repo.findById(id).get();
+            oldRecord.setStreet(newBuildingModel.getStreet());
+            oldRecord.setCity(newBuildingModel.getCity());
+            oldRecord.setMarketValue(newBuildingModel.getMarketValue());
+            oldRecord.setNumber(newBuildingModel.getNumber());
+            oldRecord.setOwner(newBuildingModel.getOwner());
+            oldRecord.setPropertyType(newBuildingModel.getPropertyType());
+            oldRecord.setSize(newBuildingModel.getSize());
+            repo.save(newBuildingModel);
+        } else {
+            throw new NotFoundException("Record not found:" + id);
+        }
+    }
+
+    public void deleteBuildingById(long id) {
+        repo.deleteById(id);
     }
 }

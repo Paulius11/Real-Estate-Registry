@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Component
 public class BuildingModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     private String city;
@@ -33,10 +33,6 @@ public class BuildingModel {
         this.size = size;
         this.marketValue = marketValue;
         this.propertyType = propertyType;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public void setCity(String city) {

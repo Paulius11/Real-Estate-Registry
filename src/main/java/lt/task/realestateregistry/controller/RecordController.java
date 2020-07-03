@@ -27,15 +27,15 @@ public class RecordController {
         return buildingTaskService.createBuilding(buildingModel);
     }
 
-    @PutMapping
+    @PutMapping("{id}")
     @ApiOperation(value = "Edit building record", notes = "Edits building record.")
-    public String editBuildingRecord(){
-        return "editing building";
+    public void editBuildingRecord(@RequestBody BuildingModel buildingModel, @PathVariable long id){
+        buildingTaskService.editBuildingRecord(buildingModel, id);
     }
 
-    @DeleteMapping
+    @DeleteMapping("{id}")
     @ApiOperation(value = "Delete building record", notes = "Deletes building record.")
-    public String deleteBuildingRecord(){
-        return "deleting building";
+    public void deleteBuildingRecord(@PathVariable long id){
+        buildingTaskService.deleteBuildingById(id);
     }
 }
