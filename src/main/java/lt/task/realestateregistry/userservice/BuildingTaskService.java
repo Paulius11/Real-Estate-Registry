@@ -31,7 +31,7 @@ public class BuildingTaskService {
     public Iterable<BuildingModel> getAllBuildings() {
         listOfBuildings =  new ArrayList<>();
         log.info("Getting list of all records");
-        return (List<BuildingModel>) repo.findAll();
+        return repo.findAll();
     }
 
     /**
@@ -57,6 +57,7 @@ public class BuildingTaskService {
 
     public void editBuildingRecord(BuildingModel newBuildingModel, Long id) {
         if (repo.findById(id).isPresent()) {
+            log.info("Updating record:  " + id);
             BuildingModel oldRecord = repo.findById(id).get();
             oldRecord.setStreet(newBuildingModel.getStreet());
             oldRecord.setCity(newBuildingModel.getCity());
@@ -72,6 +73,11 @@ public class BuildingTaskService {
     }
 
     public void deleteBuildingById(long id) {
-        repo.deleteById(id);
+        if (repo.findById(id).isPresent()) {
+            log.info("Deleting record:  " + id);
+            repo.deleteById(id);
+        } else {
+            throw new NotFoundException("Record not found:" + id);
+        }
     }
 }
