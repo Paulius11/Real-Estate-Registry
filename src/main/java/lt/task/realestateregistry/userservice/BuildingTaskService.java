@@ -36,16 +36,6 @@ public class BuildingTaskService {
         return save;
     }
 
-
-    public void deleteRecordById(Long id) {
-        try {
-            log.info("Deleting by id: " + id);
-            repo.deleteById(id);
-        } catch (Exception e) {
-            throw new NotFoundException("id:" + id);
-        }
-    }
-
     public void editBuildingRecord(BuildingModel newBuildingModel, Long id) {
         if (repo.findById(id).isPresent()) {
             log.info("Updating record:  " + id);
