@@ -3,15 +3,10 @@ package lt.task.realestateregistry.userservice;
 import lt.task.realestateregistry.doa.RecordRepository;
 import lt.task.realestateregistry.exceptions.NotFoundException;
 import lt.task.realestateregistry.model.BuildingModel;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class BuildingTaskService {
@@ -26,10 +21,7 @@ public class BuildingTaskService {
     private BuildingModel buildingModel;
 
 
-    private List<BuildingModel> listOfBuildings;
-
     public Iterable<BuildingModel> getAllBuildings() {
-        listOfBuildings =  new ArrayList<>();
         log.info("Getting list of all records");
         return repo.findAll();
     }
@@ -43,7 +35,6 @@ public class BuildingTaskService {
         log.debug(save.toString());
         return save;
     }
-
 
 
     public void deleteRecordById(Long id) {
