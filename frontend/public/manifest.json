@@ -1,0 +1,8 @@
+{
+  "short_name": "Task CRUD app",
+  "name": "Real Estate Registry for Buildings",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
