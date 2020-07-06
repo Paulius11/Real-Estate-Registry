@@ -13,15 +13,20 @@ export default function MaterialTableDemo() {
       { title: "Size", field: "size", type: "numeric" },
       { title: "Market value", field: "marketValue", type: "numeric" },
       {
+        title: "Property type",
+        field: "propertyType",
+        lookup: { HOUSE: "HOUSE", INDUSTRIAL: "INDUSTRIAL", APARTMENT: "APARTMENT"  },
+      },
+      {
         title: "Tax (year)",
         render: (rowData) => {
           try {
-            let taxRate = (rowData.marketValue * 1.21 - rowData.marketValue) * 12;
+            let taxRate =
+              (rowData.marketValue * 1.21 - rowData.marketValue) * 12;
             return taxRate;
           } catch (error) {
-              return;
+            return;
           }
-
         },
       },
     ],
