@@ -15,9 +15,13 @@ export default function MaterialTableDemo() {
       {
         title: "Tax (year)",
         render: (rowData) => {
-          const taxRate =
-            (rowData.marketValue * 1.21 - rowData.marketValue) * 12;
-          return taxRate;
+          try {
+            let taxRate = (rowData.marketValue * 1.21 - rowData.marketValue) * 12;
+            return taxRate;
+          } catch (error) {
+              return;
+          }
+
         },
       },
     ],
