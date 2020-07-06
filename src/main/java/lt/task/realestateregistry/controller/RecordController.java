@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import lt.task.realestateregistry.model.BuildingModel;
 import lt.task.realestateregistry.model.BuildingPostModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import lt.task.realestateregistry.userservice.BuildingTaskService;
 
@@ -23,6 +24,7 @@ public class RecordController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     @ApiOperation(value = "Create building record", notes = "Creates building record.")
     public BuildingModel createBuildingRecord(@RequestBody BuildingModel buildingModel){
         return buildingTaskService.createBuilding(buildingModel);
