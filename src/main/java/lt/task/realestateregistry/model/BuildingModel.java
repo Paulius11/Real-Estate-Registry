@@ -24,6 +24,17 @@ public class BuildingModel {
     public BuildingModel() {
     }
 
+    public BuildingModel(long id, String city, String street, int number, String owner, int size, float marketValue, PropertyType propertyType) {
+        this.id = id;
+        this.city = city;
+        this.street = street;
+        this.number = number;
+        this.owner = owner;
+        this.size = size;
+        this.marketValue = marketValue;
+        this.propertyType = propertyType;
+    }
+
     public BuildingModel(String city, String street, int number, String owner, int size, float marketValue, PropertyType propertyType) {
         super();
         this.city = city;
